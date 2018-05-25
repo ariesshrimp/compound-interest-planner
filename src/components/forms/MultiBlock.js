@@ -107,6 +107,13 @@ const withTotal = rc.withStateHandlers(
         blocks,
         total: total(blocks)
       };
+    },
+    updateBlocks: (state, props) => newBlocks => {
+      return {
+        ...state,
+        blocks: newBlocks,
+        total: total(newBlocks)
+      };
     }
   }
 );
@@ -150,6 +157,11 @@ const MultiBlock = props => {
             remove={props.removeBlock}
             link={starting => props.addBlock(starting)}
             updateTotal={props.updateTotal}
+            updateBlock={(id, newBlock) => {
+              const _newBlock = R.merge(props.blocks[id], newBlock);
+              const newBlocks = R.assoc(id, _newBlock, props.blocks);
+              props.updateBlocks(newBlocks);
+            }}
           />
         );
       })}

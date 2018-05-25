@@ -5,7 +5,8 @@ import {
   Label,
   Header,
   Container,
-  Segment
+  Segment,
+  Checkbox
 } from "semantic-ui-react";
 import { parseDecimal, numberWithCommas } from "../../utilities/numbers";
 
@@ -40,6 +41,12 @@ const InterestBlock = props => {
         >
           +
         </Button>
+        <Checkbox
+          slider
+          label={props.type}
+          checked={props.type === "simple"}
+          onChange={props.toggleType}
+        />
         <Input
           labelPosition="right"
           value={parseDecimal(props.P)}
